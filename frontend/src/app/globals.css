@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════════════════════════
+   CSS VARIABLES — set by AppearanceProvider via html.style.setProperty
+   Defaults = dark theme
+══════════════════════════════════════════════════════════════════════ */
+:root {
+  --font-space-grotesk: 'Space Grotesk', sans-serif;
+  --font-space-mono:    'Space Mono', monospace;
+  --font-bebas-neue:    'Bebas Neue', sans-serif;
+
+  /* Theme tokens (overridden by AppearanceProvider) */
+  --bg:          #0a0a0a;
+  --surface:     #111111;
+  --text:        #f5f5f0;
+  --accent:      #ff3b00;
+  --border:      #1e1e1e;
+  --text-muted:  #f5f5f088;
+  --text-subtle: #f5f5f044;
+  --accent-glow: #ff3b0020;
+}
+
+/* ── Base ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-space-grotesk);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::selection { background: var(--accent); color: var(--bg); }
+
+/* ── Font Size — DASHBOARD ONLY, auth pages always fixed at 14px ── */
+[data-scope="dashboard"][data-fontsize="small"]  { font-size: 12px; }
+[data-scope="dashboard"][data-fontsize="medium"] { font-size: 14px; }
+[data-scope="dashboard"][data-fontsize="large"]  { font-size: 16px; }
+
+/* Auth pages: always 14px, never affected by user font-size setting */
+[data-scope="auth"] { font-size: 14px !important; }
+
+/* ── Density — DASHBOARD ONLY ── */
+[data-scope="dashboard"][data-density="compact"]     { --density-p: 0.75rem; --density-gap: 0.5rem;  }
+[data-scope="dashboard"][data-density="comfortable"] { --density-p: 1.5rem;  --density-gap: 1rem;   }
+[data-scope="dashboard"][data-density="spacious"]    { --density-p: 2.25rem; --density-gap: 1.5rem; }
+[data-scope="dashboard"][data-density="compact"]     main { padding: var(--density-p) !important; }
+[data-scope="dashboard"][data-density="comfortable"] main { padding: var(--density-p) !important; }
+[data-scope="dashboard"][data-density="spacious"]    main { padding: var(--density-p) !important; }
+[data-scope="dashboard"][data-density="compact"]     .space-y-6 > * + * { margin-top: 0.75rem !important; }
+[data-scope="dashboard"][data-density="comfortable"] .space-y-6 > * + * { margin-top: 1.5rem  !important; }
+[data-scope="dashboard"][data-density="spacious"]    .space-y-6 > * + * { margin-top: 2.5rem  !important; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   THEME-AWARE UTILITY OVERRIDES — dashboard scope only
+══════════════════════════════════════════════════════════════════════ */
+
+/* Backgrounds */
+.theme-bg      { background-color: var(--bg) !important; }
+.theme-surface { background-color: var(--surface) !important; }
+.theme-border  { border-color: var(--border) !important; }
+.theme-text       { color: var(--text) !important; }
+.theme-text-muted { color: var(--text-muted) !important; }
+.theme-accent      { color: var(--accent) !important; }
+.theme-accent-bg   { background-color: var(--accent) !important; }
+.theme-accent-border { border-color: var(--accent) !important; }
+.theme-accent-glow { background-color: var(--accent-glow) !important; }
+
+/* Tailwind color overrides — DASHBOARD ONLY */
+[data-scope="dashboard"] .bg-\[\#0a0a0a\], [data-scope="dashboard"] .bg-\[\#0c0c0c\],
+[data-scope="dashboard"] .bg-\[\#0d0d0d\], [data-scope="dashboard"] .bg-\[\#0e0e0e\],
+[data-scope="dashboard"] .bg-\[\#111\],    [data-scope="dashboard"] .bg-\[\#111111\] {
+  background-color: var(--surface) !important;
+  transition: background-color 0.25s ease;
+}
+[data-scope="dashboard"] .border-\[\#1e1e1e\], [data-scope="dashboard"] .border-\[\#2a2a2a\],
+[data-scope="dashboard"] .border-\[\#1a1a1a\] {
+  border-color: var(--border) !important;
+  transition: border-color 0.25s ease;
+}
+[data-scope="dashboard"] .text-white {
+  color: var(--text) !important;
+  transition: color 0.25s ease;
+}
+[data-scope="dashboard"] .text-\[\#555\], [data-scope="dashboard"] .text-\[\#444\],
+[data-scope="dashboard"] .text-\[\#333\], [data-scope="dashboard"] .text-\[\#666\] {
+  color: var(--text-muted) !important;
+  transition: color 0.25s ease;
+}
+[data-scope="dashboard"] .bg-\[\#ff3b00\]    { background-color: var(--accent) !important; }
+[data-scope="dashboard"] .border-\[\#ff3b00\] { border-color: var(--accent) !important; }
+[data-scope="dashboard"] .text-\[\#ff3b00\]   { color: var(--accent) !important; }
+
+/* ══════════════════════════════════════════════════════════════════════
+   AUTH SCOPE — hardcoded dark, never affected by user theme
+══════════════════════════════════════════════════════════════════════ */
+[data-scope="auth"] {
+  --bg:          #0a0a0a;
+  --surface:     #111111;
+  --text:        #f5f5f0;
+  --accent:      #ff3b00;
+  --border:      #1e1e1e;
+  --text-muted:  #f5f5f088;
+  --text-subtle: #f5f5f044;
+  --accent-glow: #ff3b0020;
+}
+
+@layer components {
+
+  /* ── Buttons ── */
+  .btn-brutal {
+    @apply inline-flex items-center gap-2 px-4 py-2
+           font-mono font-bold text-xs uppercase tracking-widest
+           border-2 bg-transparent
+           shadow-brutal transition-all duration-75 cursor-pointer select-none
+           hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none
+           active:translate-x-[4px] active:translate-y-[4px] active:shadow-none;
+    border-color: var(--text);
+    color: var(--text);
+  }
+  .btn-brutal-accent {
+    @apply btn-brutal;
+    background-color: var(--accent) !important;
+    border-color:     var(--accent) !important;
+    color:            var(--bg)     !important;
+  }
+  .btn-brutal-ghost {
+    @apply inline-flex items-center gap-2 px-4 py-2
+           font-mono font-bold text-xs uppercase tracking-widest
+           border-2 bg-transparent
+           transition-all duration-75 cursor-pointer select-none;
+    border-color: var(--border);
+    color: var(--text-muted);
+  }
+  .btn-brutal-ghost:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+
+  /* ── Inputs ── */
+  .input-brutal {
+    @apply w-full border-2 px-3 py-2.5 font-mono text-sm
+           focus:outline-none transition-colors duration-100;
+    background-color: var(--bg);
+    border-color:     var(--border);
+    color:            var(--text);
+  }
+  .input-brutal::placeholder { color: var(--text-subtle); }
+  .input-brutal:focus         { border-color: var(--accent); }
+  .textarea-brutal { @apply input-brutal resize-none; }
+
+  /* ── Cards ── */
+  .card-brutal      { @apply border-2 p-4; border-color: var(--text);   background-color: var(--surface); }
+  .card-brutal-muted{ @apply border-2 p-4; border-color: var(--border); background-color: var(--surface); }
+
+  /* ── Label ── */
+  .label-brutal {
+    @apply block font-mono text-xs uppercase tracking-widest mb-1.5;
+    color: var(--text-muted);
+  }
+
+  /* ── Page header ── */
+  .page-header {
+    @apply flex items-end justify-between border-b-2 pb-4 mb-6;
+    border-color: var(--border);
+  }
+
+  /* ── Typography ── */
+  .section-title    { @apply font-display text-5xl uppercase tracking-wider leading-none; color: var(--text); }
+  .section-title-sm { @apply font-display text-3xl uppercase tracking-wider leading-none; color: var(--text); }
+
+  /* ── Badges ── */
+  .badge        { @apply inline-flex items-center px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider border; }
+  .badge-green  { @apply badge; border-color: #00c853; color: #00c853; }
+  .badge-red    { @apply badge; border-color: var(--accent); color: var(--accent); }
+  .badge-yellow { @apply badge; border-color: #ffd600; color: #ffd600; }
+  .badge-blue   { @apply badge; border-color: #0057ff; color: #0057ff; }
+  .badge-gray   { @apply badge; border-color: var(--text-muted); color: var(--text-muted); }
+  .badge-white  { @apply badge; border-color: var(--text); color: var(--text); }
+
+  /* ── Tags ── */
+  .tag-brutal {
+    @apply inline-block px-2 py-0.5 text-[10px] font-mono font-bold uppercase tracking-wider border border-current;
+  }
+
+  /* ── Nav ── */
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-2.5 font-mono text-[11px] uppercase tracking-widest
+           border-l-2 border-transparent transition-all duration-75;
+    color: var(--text-muted);
+  }
+  .nav-link:hover {
+    color: var(--text);
+    border-color: var(--text);
+    background-color: var(--accent-glow);
+  }
+  .nav-link-active {
+    @apply nav-link;
+    color: var(--text) !important;
+    border-color: var(--accent) !important;
+    background-color: var(--accent-glow) !important;
+  }
+
+  /* ── Tables ── */
+  .table-brutal { @apply w-full border-collapse; }
+  .table-brutal th {
+    @apply border-b-2 px-4 py-3 text-left font-mono text-[10px] uppercase tracking-widest;
+    border-color: var(--text);
+    color: var(--text-muted);
+    background-color: var(--surface);
+  }
+  .table-brutal td {
+    @apply border-b px-4 py-3 text-sm;
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .table-brutal tbody tr:hover td { background-color: var(--accent-glow); }
+
+  /* ── Skeleton ── */
+  .skeleton { @apply animate-pulse; background-color: var(--border); }
+
+  /* ── Ticker ── */
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll linear infinite;
+  }
+  .ticker-track-reverse {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll-reverse linear infinite;
+  }
+}
+
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes ticker-scroll-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
