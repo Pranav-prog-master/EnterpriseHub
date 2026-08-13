@@ -1,6 +1,6 @@
 # EnterpriseHub AI
 
-Enterprise-grade, AI-powered SaaS platform — HRMS, CRM, Project Management, Documents, Collaboration, Analytics, and more in one unified workspace.
+Enterprise-grade, Management powered SaaS platform — HRMS, CRM, Project Management, Documents, Collaboration, Analytics, and more in one unified workspace.
 
 ---
 
@@ -8,13 +8,6 @@ Enterprise-grade, AI-powered SaaS platform — HRMS, CRM, Project Management, Do
 
 **First time here? Start with these:**
 
-| 📄 Guide | 🎯 Purpose |
-|----------|-----------|
-| **[START_HERE.md](START_HERE.md)** | 👈 **Start here!** - Fastest way to get running |
-| **[CURRENT_STATUS.md](CURRENT_STATUS.md)** | ✅ What's been fixed & current status |
-| **[PERFORMANCE_QUICK_START.md](PERFORMANCE_QUICK_START.md)** | ⚡ Make everything fast in 3 steps |
-| **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** | 🔧 Common issues & solutions |
-| **[VERIFY_SETUP.bat](VERIFY_SETUP.bat)** | 🔍 Check if setup is correct |
 
 **💡 Quick Actions:**
 - 🚀 **Fast Startup:** Double-click `START_FAST.bat`
